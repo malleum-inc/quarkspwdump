@@ -81,6 +81,11 @@ Some command examples:
 	C:\> quarks-pwdump.exe -dhd -nt C:\pentest\NTDS.dit -sf C:\pentest\SYSTEM -o hashes.txt
 ```
 
+- Dump domain hashes from offline NTDS.dit with manual get SYSTEM key `B5D32197C4D5AAB3F3C4D3DA23132F2B`. 
+```console
+	C:\> quarks-pwdump.exe -dhd -nt C:\pentest\NTDS.dit -sk B5D32197C4D5AAB3F3C4D3DA23132F2B
+```
+
 All online hash dump features require administrator privileges. NTDS.dit hash dumps with an offline SYSTEM hive can be performed with any user privileges.
 
 
