@@ -41,12 +41,14 @@ Here it is how you can use Quarks PWDump:
 ```console
 quarks-pwdump.exe <options>
 	Options : 
+	-k    --get-system-key
 	-dhl  --dump-hash-local
 	-dhdc --dump-hash-domain-cached
 	-dhd  --dump-hash-domain (NTDS_FILE must be specified)
 	-db   --dump-bitlocker (NTDS_FILE must be specified)
 	-nt   --ntds-file FILE
 	-sf   --system-file FILE
+	-sk   --system-key KEY
 	-hist --with-history (optional)
 	-t    --output-type JOHN/LC (optional, if no=>JOHN)
 	-o    --output FILE (optional, if no=>stdout)
@@ -78,6 +80,11 @@ Some command examples:
 - Dump domain hashes from offline NTDS.dit with SYSTEM hive file to `hashes.txt` file
 ```console
 	C:\> quarks-pwdump.exe -dhd -nt C:\pentest\NTDS.dit -sf C:\pentest\SYSTEM -o hashes.txt
+```
+
+- Dump domain hashes from offline NTDS.dit with manual get SYSTEM key `B5D32197C4D5AAB3F3C4D3DA23132F2B`. 
+```console
+	C:\> quarks-pwdump.exe -dhd -nt C:\pentest\NTDS.dit -sk B5D32197C4D5AAB3F3C4D3DA23132F2B
 ```
 
 All online hash dump features require administrator privileges. NTDS.dit hash dumps with an offline SYSTEM hive can be performed with any user privileges.

@@ -81,6 +81,11 @@ BOOL ParseCommandLine(int argc, TCHAR* argv[]) {
 			else
 				return FALSE;
 		}
+		else if((!strcmp(argv[i],"--get-system-key")) || (!strcmp(argv[i],"-k"))){
+			GetSysKey();
+			exit(0);
+		}
+
 		else if((!strcmp(argv[i],"--ntds-file")) || (!strcmp(argv[i],"-nt"))){
 			if((i+1) < argc) {
 				lstrcpyn(OPT_NTDS_FILENAME,argv[i+1],MAX_PATH);
@@ -95,6 +100,15 @@ BOOL ParseCommandLine(int argc, TCHAR* argv[]) {
 				lstrcpyn(OPT_SYSTEM_FILENAME, argv[i + 1], MAX_PATH);
 				i++;
 				OPT_WITH_SYSTEM_FILE = TRUE;
+			}
+			else
+				return FALSE;
+		}
+		else if ((!strcmp(argv[i], "--system-key")) || (!strcmp(argv[i], "-sk"))){
+			if ((i + 1) < argc) {
+				lstrcpyn(OPT_SYSTEM_KEY, argv[i + 1], MAX_PATH);
+				i++;
+				OPT_WITH_SYSTEM_KEY = TRUE;
 			}
 			else
 				return FALSE;
@@ -149,8 +163,20 @@ BOOL CommandDispatcher() {
 
 	/* Get SYSKEY (for domain hash dump only) */
 	if(OPT_DUMP_HASH_DOMAIN || OPT_DUMP_HASH_DOMAIN_CACHED) {
-		printf("[+] SYSKEY restrieving...");		
-		ret_code = (OPT_WITH_SYSTEM_FILE)?CRYPT_SyskeyGetOfflineValue(&SYSKEY, OPT_SYSTEM_FILENAME) : CRYPT_SyskeyGetValue(&SYSKEY);
+		printf("[+] SYSKEY restrieving...");
+		if (OPT_WITH_SYSTEM_FILE)
+		{
+			ret_code = CRYPT_SyskeyGetOfflineValue(&SYSKEY, OPT_SYSTEM_FILENAME);
+		}
+		else if (OPT_WITH_SYSTEM_KEY)
+		{
+			ret_code = CRYPT_Hex2Bin(OPT_SYSTEM_KEY,&SYSKEY,16);
+		}
+		else
+		{
+			CRYPT_SyskeyGetValue(&SYSKEY);
+		}
+		
 		if(ret_code==SYSKEY_SUCCESS) {
 			puts("[OK]");
 			SYSKEY_Dump(&SYSKEY);

@@ -1,5 +1,6 @@
 #include "crypt.h"
 #include "loadhive.h"
+#include <tchar.h>
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -730,4 +731,44 @@ int CRYPT_SAM_DecipherAllCachedAccount(ll_cachedAccountInfo cachedAccountInfo,s_
 	}while(currentAccount);
 
 	return nbNonEmpty ? CRYPT_SUCCESS : CRYPT_EMPTY_RECORD;
+}
+
+/*
+* Hex to Binary
+*/
+
+BOOL CRYPT_Hex2Bin( char* hex,s_SYSKEY* bin,int size )
+{
+	if((size % 2) != 0)
+		return FALSE;
+
+	auto getbin = [](int x) -> int
+	{
+		if (x >= '0' && x <= '9')
+			return x - '0';
+
+		if (x >= 'A' && x <= 'F')
+			return x - 'A' + 10;
+
+		return x - 'a' + 10;
+	};
+
+	int i = 0;
+	for  (int j = 0; j < size, i < size*2 ; j ++ ,i += 2) 
+	{
+		int byte = hex[i];
+		if (byte == EOF)
+			break;
+
+		if (!isxdigit(byte))
+			continue;
+
+		const int digit = hex[i+1];
+		if (digit == EOF || !isxdigit(digit)) 
+			break;
+
+		bin->key[j] = (getbin(byte) << 4) | getbin(digit);
+
+	}
+	return i == size*2 ? 0 : -2;
 }
