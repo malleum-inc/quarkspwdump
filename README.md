@@ -41,6 +41,7 @@ Here it is how you can use Quarks PWDump:
 ```console
 quarks-pwdump.exe <options>
 	Options : 
+	-k    --get-system-key
 	-dhl  --dump-hash-local
 	-dhdc --dump-hash-domain-cached
 	-dhd  --dump-hash-domain (NTDS_FILE must be specified)
