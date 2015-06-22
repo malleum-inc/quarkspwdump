@@ -81,6 +81,11 @@ BOOL ParseCommandLine(int argc, TCHAR* argv[]) {
 			else
 				return FALSE;
 		}
+		else if((!strcmp(argv[i],"--get-system-key")) || (!strcmp(argv[i],"-k"))){
+			GetSysKey();
+			exit(0);
+		}
+
 		else if((!strcmp(argv[i],"--ntds-file")) || (!strcmp(argv[i],"-nt"))){
 			if((i+1) < argc) {
 				lstrcpyn(OPT_NTDS_FILENAME,argv[i+1],MAX_PATH);

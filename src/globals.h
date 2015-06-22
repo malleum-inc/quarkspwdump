@@ -18,6 +18,7 @@ static TCHAR APP_BANNER[10*91] = {
 static TCHAR APP_USAGE[10*100] = {
 	"quarks-pwdump.exe <options>\r\n"
 	"Options : \r\n"
+	"-k    --get-system-key\r\n"
 	"-dhl  --dump-hash-local\r\n"
 	"-dhdc --dump-hash-domain-cached\r\n"
 	"-dhd  --dump-hash-domain (NTDS_FILE must be specified)\r\n"

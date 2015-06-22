@@ -178,3 +178,4 @@ BOOL NTDS_NTLM_DumpAll(ll_ldapAccountInfo ldapAccountInfo,NT_DUMP_TYPE dump_type
 BOOL SAM_NTLM_DumpAll(ll_localAccountInfo localAccountInfo,NT_DUMP_TYPE dump_type,BOOL isStdout,LPSTR outFileName);
 BOOL SAM_NTLM_Cached_DumpAll(ll_cachedAccountInfo cachedAccountInfo,NT_DUMP_TYPE dump_type,BOOL isStdout,LPSTR outFileName);
 BOOL Bitlocker_DumpAll(ll_bitlockerAccountInfo bitlockerAccountInfo,BOOL isStdout,LPSTR outFileName);
+void GetSysKey();
