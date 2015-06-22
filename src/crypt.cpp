@@ -731,3 +731,62 @@ int CRYPT_SAM_DecipherAllCachedAccount(ll_cachedAccountInfo cachedAccountInfo,s_
 
 	return nbNonEmpty ? CRYPT_SUCCESS : CRYPT_EMPTY_RECORD;
 }
+
+/*
+* Hex to Binary
+*/
+
+BOOL CRYPT_Hex2Bin( char* hex,s_SYSKEY* bin,int size )
+{
+	if((size % 2) != 0)
+		return FALSE;
+
+	static unsigned int hex2bin[256]={0};
+	memset(hex2bin,0xFF,256);
+	hex2bin['1'] = 1;
+	hex2bin['2'] = 2;
+	hex2bin['3'] = 3;
+	hex2bin['4'] = 4;
+	hex2bin['5'] = 5;
+	hex2bin['6'] = 6;
+	hex2bin['7'] = 7;
+	hex2bin['8'] = 8;
+	hex2bin['9'] = 9;
+	hex2bin['0'] = 0;
+	hex2bin['a'] = 0xa;
+	hex2bin['b'] = 0xb;
+	hex2bin['c'] = 0xc;
+	hex2bin['d'] = 0xd;
+	hex2bin['e'] = 0xe;
+	hex2bin['f'] = 0xf;
+	hex2bin['A'] = 0xA;
+	hex2bin['B'] = 0xB;
+	hex2bin['C'] = 0xC;
+	hex2bin['D'] = 0xC;
+	hex2bin['E'] = 0xE;
+	hex2bin['F'] = 0xF;
+
+	int i = 0;
+
+	for (; i < size ;i ++)
+	{
+		if (hex[i] <= '9' && hex[i] >= '0')
+		{
+			bin->key[i] = hex2bin[bin->key[i]];
+		}
+		else if(hex[i] <= 'f' && hex[i] >= 'a')
+		{
+			bin->key[i] = hex2bin[bin->key[i]];
+		}
+		else if (hex[i] <= 'F' && hex[i] >= 'A')
+		{
+			bin->key[i] = hex2bin[bin->key[i]];
+		}
+		else
+		{
+			break;
+		}
+	}
+
+	return i == size ? 0 : -2;
+}

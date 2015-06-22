@@ -23,6 +23,7 @@ static TCHAR APP_USAGE[10*100] = {
 	"-dhd  --dump-hash-domain (NTDS_FILE must be specified)\r\n"
 	"-db   --dump-bitlocker (NTDS_FILE must be specified)\r\n"
 	"-sf   --system-file FILE\r\n"
+	"-sk   --system-key KEY\r\n"
 	"-nt   --ntds-file FILE\r\n"
 	"-hist --with-history (optional)\r\n"
 	"-t    --output-type JOHN/LC (optional, if no=>JOHN)\r\n"
@@ -37,10 +38,12 @@ static BOOL OPT_DUMP_HASH_DOMAIN = FALSE;
 static BOOL OPT_DUMP_BITLOCKER = FALSE;
 static BOOL OPT_WITH_HISTORY = FALSE;
 static BOOL OPT_WITH_SYSTEM_FILE = FALSE;
+static BOOL OPT_WITH_SYSTEM_KEY = FALSE;
 static BOOL OPT_OUT_STDOUT = TRUE;
 static TCHAR OPT_OUTPUT_FILENAME[MAX_PATH+1];
 static TCHAR OPT_NTDS_FILENAME[MAX_PATH+1];
 static TCHAR OPT_SYSTEM_FILENAME[MAX_PATH + 1];
+static TCHAR OPT_SYSTEM_KEY[MAX_PATH + 1];
 static NT_DUMP_TYPE OPT_NT_DUMP_TYPE = NTDUMP_JOHN;
 
 /* Account and crypto struct */

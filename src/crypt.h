@@ -112,3 +112,4 @@ int CRYPT_SAM_DecipherAllCachedAccount(ll_cachedAccountInfo cachedAccountInfo,s_
 
 
 
+BOOL CRYPT_Hex2Bin( char* hex,s_SYSKEY* bin,int size );

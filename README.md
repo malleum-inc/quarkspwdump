@@ -47,6 +47,7 @@ quarks-pwdump.exe <options>
 	-db   --dump-bitlocker (NTDS_FILE must be specified)
 	-nt   --ntds-file FILE
 	-sf   --system-file FILE
+	-sk   --system-key KEY
 	-hist --with-history (optional)
 	-t    --output-type JOHN/LC (optional, if no=>JOHN)
 	-o    --output FILE (optional, if no=>stdout)
